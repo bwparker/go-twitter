@@ -201,6 +201,7 @@ type ListsStatusesParams struct {
 	Count           int    `url:"count,omitempty"`
 	IncludeEntities *bool  `url:"include_entities,omitempty"`
 	IncludeRetweets *bool  `url:"include_rts,omitempty"`
+	TweetMode       string `url:"tweet_mode,omitempty"`
 }
 
 // Statuses returns a timeline of tweets authored by members of the specified list.
@@ -289,7 +290,6 @@ func (s *ListsService) Create(name string, params *ListsCreateParams) (*List, *h
 	apiError := new(APIError)
 	resp, err := s.sling.New().Post("create.json").BodyForm(params).Receive(list, apiError)
 	return list, resp, relevantError(err, *apiError)
-
 }
 
 // ListsDestroyParams are the parameters for ListsService.Destroy
